@@ -6,6 +6,7 @@ import "./waluty.scss";
 export default function App() {
   const [table, setTable] = useState("C");
   const [symbol, setSymbol] = useState("");
+  const [committedSymbol, setCommittedSymbol] = useState("");
   const [startDate, setStartDate] = useState("");
 
   const handleChange = (
@@ -15,11 +16,16 @@ export default function App() {
       case "table":
         setTable(ev.target.value);
         setSymbol("");
+        setCommittedSymbol("");
         setStartDate("");
         break;
-      case "input":
+      case "input": {
         setSymbol(ev.target.value);
+        const isValid = /^[A-Z]{3}$/.test(ev.target.value);
+        setCommittedSymbol(isValid ? ev.target.value : "");
+        if (!isValid) setStartDate("");
         break;
+      }
       case "data": {
         let delta: number;
         const today = new Date().getTime();
@@ -76,7 +82,7 @@ export default function App() {
         <datalist id="waluta">
           <SendFetch searchText={symbol} table={table} search />
         </datalist>
-        {/[A-Z]{3}/.test(symbol) && (
+        {committedSymbol && (
           <>
             <label htmlFor="data">Wybierz okres: </label>
             <select id="data" onChange={handleChange}>
@@ -90,11 +96,11 @@ export default function App() {
         )}
       </form>
       <div>{}</div>
-      <SendFetch code={symbol} table={table} date={startDate} />
+      <SendFetch code={committedSymbol} table={table} date={startDate} />
       {startDate && (
         <Graff
           table={table}
-          code={symbol}
+          code={committedSymbol}
           startData={startDate}
           data={new Date().toISOString().substring(0, 10)}
         />
