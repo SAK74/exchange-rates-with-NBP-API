@@ -25,7 +25,7 @@ export default function SendFetch(props: SendFetchProps) {
   const [error, setError] = useState<string | false>(false);
 
   useEffect(() => {
-    fetch(`http://api.nbp.pl/api/exchangerates/tables/${props.table}/`)
+    fetch(`${API_URL}/tables/${props.table}/`)
       .then((response) => response.json())
       .then((res) => {
         setState(res[0]);
