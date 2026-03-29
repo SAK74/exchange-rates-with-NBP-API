@@ -54,7 +54,7 @@ export default function App() {
     }
   };
 
-  const handleSubmit = (ev: React.FormEvent) => {
+  const handleSubmit = (ev: React.SubmitEvent) => {
     ev.preventDefault();
   };
 

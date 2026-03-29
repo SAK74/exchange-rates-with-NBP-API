@@ -18,7 +18,7 @@ No test runner is configured.
 Both `SendFetch.tsx` and `Graff.tsx` fetch from the global `API_URL`, which Vite injects at build/dev time via `define` in `vite.config.ts`. You must set it in a `.env` file:
 
 ```
-API_URL=http://api.nbp.pl/api/exchangerates
+API_URL=https://api.nbp.pl/api/exchangerates
 ```
 
 ## Architecture
